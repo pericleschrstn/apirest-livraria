@@ -52,6 +52,16 @@ class BookController {
       res.status(500).json({ message: `${error.message} - Não foi possível excluir o livro` });
     }
   }
+
+  static async getBooksByEditora(req, res) {
+    const editora = req.query.editora;
+    try {
+      const booksByEditora = await book.find({ editora: editora });
+      res.status(200).json(booksByEditora);
+    } catch (error) {
+      res.status(500).json({ message: `${error.message} - Falha na busca` });
+    }
+  }
 }
 
 export default BookController;
